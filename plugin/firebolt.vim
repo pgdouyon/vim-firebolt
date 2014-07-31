@@ -13,9 +13,9 @@ function! s:Firebolt(forward, inclusive, operator)
     let char_two = type(c2) ? c2 : nr2char(c2)
     let char_two = (char_two == "\r") ? "" : char_two
     let Find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
-    let s:find_args = {'forward': a:forward, 'inclusive': a:inclusive,
+    let s:firebolt = {'forward': a:forward, 'inclusive': a:inclusive,
         \ 'char_one': char_one, 'char_two': char_two, 'find_char': Find_char}
-    call s:find_args.find_char()
+    call s:firebolt.find_char()
 endfunction
 
 
@@ -42,14 +42,14 @@ endfunction
 
 
 function! s:RepeatFind(forward, operator)
-    if !exists("s:find_args")
+    if !exists("s:firebolt")
         return
     endif
-    let dir = s:find_args.forward
-    let s:find_args.forward = a:forward ? dir : !dir
-    let s:find_args.find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
-    call s:find_args.find_char()
-    let s:find_args.forward = dir
+    let dir = s:firebolt.forward
+    let s:firebolt.forward = a:forward ? dir : !dir
+    let s:firebolt.find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
+    call s:firebolt.find_char()
+    let s:firebolt.forward = dir
 endfunction
 
 noremap <silent> f :call <SID>Firebolt(1, 1, 0)<CR>
