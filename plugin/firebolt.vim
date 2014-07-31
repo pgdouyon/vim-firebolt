@@ -1,3 +1,14 @@
+"==============================================================================
+"File:        firebolt.vim
+"Description: Enhanced f/t motions.  Replaces default f/t with a two character
+"             search on the same line.  Also remaps the s key to a one-char
+"             search for '(,{,<,]' using 'b,B,a,r' keys.
+"Maintainer:  Pierre-Guy Douyon <pgdouyon@alum.mit.edu>
+"Version:     1.0.0
+"Last Change: 2014-07-31
+"License:     MIT <../LICENSE>
+"==============================================================================
+
 if exists("g:loaded_firebolt")
     finish
 endif
