@@ -11,6 +11,7 @@ function! s:Firebolt(forward, inclusive, operator)
     let c2 = getchar()
     let char_one = type(c1) ? c1 : nr2char(c1)
     let char_two = type(c2) ? c2 : nr2char(c2)
+    let char_two = (char_two == "\r") ? "" : char_two
     let Find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
     let s:find_args = {'forward': a:forward, 'inclusive': a:inclusive,
         \ 'char_one': char_one, 'char_two': char_two, 'find_char': Find_char}
