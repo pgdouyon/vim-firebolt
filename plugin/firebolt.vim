@@ -52,6 +52,18 @@ function! s:RepeatFind(forward, operator)
     let s:firebolt.forward = dir
 endfunction
 
+
+function! s:Seek(forward, operator)
+    let c1 = getchar()
+    let c1 = type(c1) ? c1 : nr2char(c1)
+    let seek_table = {'b': '(\|)', 'B': '{\|}', 'a': '<\|>', 'r': '[\|]'}
+    let seek_char = get(seek_table, c1, c1)
+    let Find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
+    let s:firebolt = {'forward': a:forward, 'inclusive': !a:operator,
+        \ 'char_one': seek_char, 'char_two': "", 'find_char': Find_char}
+    call s:firebolt.find_char()
+endfunction
+
 noremap <silent> f :call <SID>Firebolt(1, 1, 0)<CR>
 noremap <silent> F :call <SID>Firebolt(0, 1, 0)<CR>
 noremap <silent> t :call <SID>Firebolt(1, 0, 0)<CR>
@@ -65,6 +77,11 @@ onoremap <silent> t :call <SID>Firebolt(1, 0, 1)<CR>
 onoremap <silent> T :call <SID>Firebolt(0, 0, 1)<CR>
 onoremap <silent> ; :call <SID>RepeatFind(1, 1)<CR>
 onoremap <silent> , :call <SID>RepeatFind(0, 1)<CR>
+
+noremap <silent> s :call <SID>Seek(1, 0)<CR>
+noremap <silent> S :call <SID>Seek(0, 0)<CR>
+onoremap <silent> s :call <SID>Seek(1, 1)<CR>
+onoremap <silent> S :call <SID>Seek(0, 1)<CR>
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
