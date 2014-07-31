@@ -52,19 +52,19 @@ function! s:RepeatFind(forward, operator)
     let s:find_args.forward = dir
 endfunction
 
-nnoremap f :call <SID>Firebolt(1, 1, 0)<CR>
-nnoremap F :call <SID>Firebolt(0, 1, 0)<CR>
-nnoremap t :call <SID>Firebolt(1, 0, 0)<CR>
-nnoremap T :call <SID>Firebolt(0, 0, 0)<CR>
-onoremap f :call <SID>Firebolt(1, 1, 1)<CR>
-onoremap F :call <SID>Firebolt(0, 1, 1)<CR>
-onoremap t :call <SID>Firebolt(1, 0, 1)<CR>
-onoremap T :call <SID>Firebolt(0, 0, 1)<CR>
+noremap <silent> f :call <SID>Firebolt(1, 1, 0)<CR>
+noremap <silent> F :call <SID>Firebolt(0, 1, 0)<CR>
+noremap <silent> t :call <SID>Firebolt(1, 0, 0)<CR>
+noremap <silent> T :call <SID>Firebolt(0, 0, 0)<CR>
+noremap <silent> ; :call <SID>RepeatFind(1, 0)<CR>
+noremap <silent> , :call <SID>RepeatFind(0, 0)<CR>
 
-nnoremap ; :call <SID>RepeatFind(1, 0)<CR>
-nnoremap , :call <SID>RepeatFind(0, 0)<CR>
-onoremap ; :call <SID>RepeatFind(1, 1)<CR>
-onoremap , :call <SID>RepeatFind(0, 1)<CR>
+onoremap <silent> f :call <SID>Firebolt(1, 1, 1)<CR>
+onoremap <silent> F :call <SID>Firebolt(0, 1, 1)<CR>
+onoremap <silent> t :call <SID>Firebolt(1, 0, 1)<CR>
+onoremap <silent> T :call <SID>Firebolt(0, 0, 1)<CR>
+onoremap <silent> ; :call <SID>RepeatFind(1, 1)<CR>
+onoremap <silent> , :call <SID>RepeatFind(0, 1)<CR>
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
