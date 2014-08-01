@@ -24,8 +24,17 @@ function! s:Firebolt(forward, inclusive, operator)
     let char_two = type(c2) ? c2 : nr2char(c2)
     let char_two = (char_two == "\r") ? "" : char_two
     let Find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
+
+    function! s:FwdRepeat(forward)
+        let fwd = s:firebolt.forward
+        let s:firebolt.forward = a:forward ? fwd : !fwd
+    endfunction
+    function! s:OpRepeat(operator)
+        return
+    endfunction
     let s:firebolt = {'forward': a:forward, 'inclusive': a:inclusive,
-        \ 'char_one': char_one, 'char_two': char_two, 'find_char': Find_char}
+        \ 'char_one': char_one, 'char_two': char_two, 'find_char': Find_char,
+        \ 'fwd_repeat': function("<SID>FwdRepeat"), 'op_repeat': function("<SID>OpRepeat")}
     call s:firebolt.find_char()
 endfunction
 
@@ -56,11 +65,12 @@ function! s:RepeatFind(forward, operator)
     if !exists("s:firebolt")
         return
     endif
-    let dir = s:firebolt.forward
-    let s:firebolt.forward = a:forward ? dir : !dir
+    let fwd = s:firebolt.forward
     let s:firebolt.find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
+    call s:firebolt.fwd_repeat(a:forward)
+    call s:firebolt.op_repeat(a:operator)
     call s:firebolt.find_char()
-    let s:firebolt.forward = dir
+    let s:firebolt.forward = fwd
 endfunction
 
 
@@ -70,8 +80,17 @@ function! s:Seek(forward, operator)
     let seek_table = {'b': '(\|)', 'B': '{\|}', 'a': '<\|>', 'r': '[\|]'}
     let seek_char = get(seek_table, c1, c1)
     let Find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
+
+    function! s:FwdRepeat(forward)
+        let fwd = s:firebolt.forward
+        let s:firebolt.forward = a:forward ? fwd : !fwd
+    endfunction
+    function! s:OpRepeat(operator)
+        let s:firebolt.inclusive = !a:operator
+    endfunction
     let s:firebolt = {'forward': a:forward, 'inclusive': !a:operator,
-        \ 'char_one': seek_char, 'char_two': "", 'find_char': Find_char}
+        \ 'char_one': seek_char, 'char_two': "", 'find_char': Find_char,
+        \ 'fwd_repeat': function("<SID>FwdRepeat"), 'op_repeat': function("<SID>OpRepeat")}
     call s:firebolt.find_char()
 endfunction
 
