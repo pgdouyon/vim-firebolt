@@ -35,7 +35,9 @@ function! s:Firebolt(forward, inclusive, operator)
     let s:firebolt = {'forward': a:forward, 'inclusive': a:inclusive,
         \ 'char_one': char_one, 'char_two': char_two, 'find_char': Find_char,
         \ 'fwd_repeat': function("<SID>FwdRepeat"), 'op_repeat': function("<SID>OpRepeat")}
-    call s:firebolt.find_char()
+    for _ in range(v:count1)
+        call s:firebolt.find_char()
+    endfor
 endfunction
 
 
@@ -69,7 +71,9 @@ function! s:RepeatFind(forward, operator)
     let s:firebolt.find_char = a:operator ? function("<SID>FindCharOp") : function("<SID>FindChar")
     call s:firebolt.fwd_repeat(a:forward)
     call s:firebolt.op_repeat(a:operator)
-    call s:firebolt.find_char()
+    for _ in range(v:count1)
+        call s:firebolt.find_char()
+    endfor
     let s:firebolt.forward = fwd
 endfunction
 
@@ -91,7 +95,9 @@ function! s:Seek(forward, operator)
     let s:firebolt = {'forward': a:forward, 'inclusive': !a:operator,
         \ 'char_one': seek_char, 'char_two': "", 'find_char': Find_char,
         \ 'fwd_repeat': function("<SID>FwdRepeat"), 'op_repeat': function("<SID>OpRepeat")}
-    call s:firebolt.find_char()
+    for _ in range(v:count1)
+        call s:firebolt.find_char()
+    endfor
 endfunction
 
 noremap <silent> f :call <SID>Firebolt(1, 1, 0)<CR>
