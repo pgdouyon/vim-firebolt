@@ -100,24 +100,45 @@ function! s:Seek(forward, operator)
     endfor
 endfunction
 
-noremap <silent> f :call <SID>Firebolt(1, 1, 0)<CR>
-noremap <silent> F :call <SID>Firebolt(0, 1, 0)<CR>
-noremap <silent> t :call <SID>Firebolt(1, 0, 0)<CR>
-noremap <silent> T :call <SID>Firebolt(0, 0, 0)<CR>
-noremap <silent> ; :call <SID>RepeatFind(1, 0)<CR>
-noremap <silent> , :call <SID>RepeatFind(0, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_f :<C-u>call <SID>Firebolt(1, 1, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_F :<C-u>call <SID>Firebolt(0, 1, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_t :<C-u>call <SID>Firebolt(1, 0, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_T :<C-u>call <SID>Firebolt(0, 0, 0)<CR>
 
-onoremap <silent> f :call <SID>Firebolt(1, 1, 1)<CR>
-onoremap <silent> F :call <SID>Firebolt(0, 1, 1)<CR>
-onoremap <silent> t :call <SID>Firebolt(1, 0, 1)<CR>
-onoremap <silent> T :call <SID>Firebolt(0, 0, 1)<CR>
-onoremap <silent> ; :call <SID>RepeatFind(1, 1)<CR>
-onoremap <silent> , :call <SID>RepeatFind(0, 1)<CR>
+vnoremap <silent> <Plug>Firebolt_f :<C-u>call <SID>Firebolt(1, 1, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_F :<C-u>call <SID>Firebolt(0, 1, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_t :<C-u>call <SID>Firebolt(1, 0, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_T :<C-u>call <SID>Firebolt(0, 0, 0)<CR>
 
-noremap <silent> s :call <SID>Seek(1, 0)<CR>
-noremap <silent> S :call <SID>Seek(0, 0)<CR>
-onoremap <silent> z :call <SID>Seek(1, 1)<CR>
-onoremap <silent> Z :call <SID>Seek(0, 1)<CR>
+onoremap <silent> <Plug>Firebolt_f :<C-u>call <SID>Firebolt(1, 1, 1)<CR>
+onoremap <silent> <Plug>Firebolt_F :<C-u>call <SID>Firebolt(0, 1, 1)<CR>
+onoremap <silent> <Plug>Firebolt_t :<C-u>call <SID>Firebolt(1, 0, 1)<CR>
+onoremap <silent> <Plug>Firebolt_T :<C-u>call <SID>Firebolt(0, 0, 1)<CR>
+
+nnoremap <silent> <Plug>Firebolt_s :<C-u>call <SID>Seek(1, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_S :<C-u>call <SID>Seek(0, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_s :<C-u>call <SID>Seek(1, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_S :<C-u>call <SID>Seek(0, 0)<CR>
+onoremap <silent> <Plug>Firebolt_s :<C-u>call <SID>Seek(1, 1)<CR>
+onoremap <silent> <Plug>Firebolt_S :<C-u>call <SID>Seek(0, 1)<CR>
+
+nnoremap <silent> <Plug>Firebolt_; :<C-u>call <SID>RepeatFind(1, 0)<CR>
+nnoremap <silent> <Plug>Firebolt_, :<C-u>call <SID>RepeatFind(0, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_; :<C-u>call <SID>RepeatFind(1, 0)<CR>
+vnoremap <silent> <Plug>Firebolt_, :<C-u>call <SID>RepeatFind(0, 0)<CR>
+onoremap <silent> <Plug>Firebolt_; :<C-u>call <SID>RepeatFind(1, 1)<CR>
+onoremap <silent> <Plug>Firebolt_, :<C-u>call <SID>RepeatFind(0, 1)<CR>
+
+if !exists("g:firebolt_no_mappings") || (g:firebolt_no_mappings == 0)
+    map f <Plug>Firebolt_f
+    map F <Plug>Firebolt_F
+    map t <Plug>Firebolt_t
+    map T <Plug>Firebolt_T
+    map s <Plug>Firebolt_s
+    map S <Plug>Firebolt_S
+    map ; <Plug>Firebolt_;
+    map , <Plug>Firebolt_,
+endif
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
