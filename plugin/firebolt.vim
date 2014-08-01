@@ -60,6 +60,7 @@ function! s:FindCharOp() dict
     let flags .= self.forward ? '' : 'b'
     let flags .= (self.forward == self.inclusive) ? 'e' : ''
     call search(pattern, flags, line("."))
+    silent! call repeat#set(v:operator."\<Plug>Firebolt_;", v:count1)
 endfunction
 
 
