@@ -110,8 +110,8 @@ onoremap <silent> , :call <SID>RepeatFind(0, 1)<CR>
 
 noremap <silent> s :call <SID>Seek(1, 0)<CR>
 noremap <silent> S :call <SID>Seek(0, 0)<CR>
-onoremap <silent> s :call <SID>Seek(1, 1)<CR>
-onoremap <silent> S :call <SID>Seek(0, 1)<CR>
+onoremap <silent> z :call <SID>Seek(1, 1)<CR>
+onoremap <silent> Z :call <SID>Seek(0, 1)<CR>
 
 let &cpoptions = s:save_cpo
 unlet s:save_cpo
