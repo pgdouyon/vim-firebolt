@@ -137,10 +137,10 @@ if !exists("g:firebolt_no_mappings") || (g:firebolt_no_mappings == 0)
     map F <Plug>Firebolt_F
     map t <Plug>Firebolt_t
     map T <Plug>Firebolt_T
-    map s <Plug>Firebolt_s
-    map S <Plug>Firebolt_S
     map ; <Plug>Firebolt_;
     map , <Plug>Firebolt_,
+    map gl <Plug>Firebolt_s
+    map gL <Plug>Firebolt_S
 endif
 
 let &cpoptions = s:save_cpo
