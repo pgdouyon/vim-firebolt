@@ -46,7 +46,8 @@ endfunction
 
 
 function! s:FindChar() dict
-    let search = escape(self.char_one . self.char_two, '\')
+    let search = (self.char_one == '\') ? '\\' : self.char_one
+    let search .= (self.char_two == '\') ? '\\' : self.char_two
     if self.inclusive
         let pattern = '\V'.search.'\.\?'
     else
@@ -60,7 +61,8 @@ endfunction
 
 
 function! s:FindCharOp() dict
-    let search = escape(self.char_one . self.char_two, '\')
+    let search = (self.char_one == '\') ? '\\' : self.char_one
+    let search .= (self.char_two == '\') ? '\\' : self.char_two
     let pattern = '\V'.search.'\.\?'
     let flags = 'W'
     let flags .= self.forward ? '' : 'b'
