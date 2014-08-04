@@ -93,12 +93,14 @@ function! s:Seek(forward, mode)
     let seek_char = get(seek_table, c1, c1)
     let inclusive = (a:mode ==? "o") ? 0 : 1
 
-    function! s:SeekRepeat(forward, mode)
-        let s:firebolt.inclusive = (a:mode ==? "o") ? 0 : 1
-    endfunction
     let s:firebolt = {'forward': a:forward, 'inclusive': inclusive,
         \ 'char_one': seek_char, 'char_two': "", 'repeat': function("<SID>SeekRepeat")}
     call s:FireboltFind(a:mode)
+endfunction
+
+
+function! s:SeekRepeat(forward, mode)
+    let s:firebolt.inclusive = (a:mode ==? "o") ? 0 : 1
 endfunction
 
 nnoremap <silent> <Plug>Firebolt_f :<C-u>call <SID>Firebolt(1, 1, "n")<CR>
