@@ -23,6 +23,9 @@ function! s:Firebolt(forward, inclusive, mode)
     let char_one = type(c1) ? c1 : nr2char(c1)
     let char_two = type(c2) ? c2 : nr2char(c2)
     let char_two = (char_two == "\r") ? "" : char_two
+    if (char_one == "\e") || (char_two == "\e")
+        return
+    endif
 
     let s:firebolt = {'forward': a:forward, 'inclusive': a:inclusive,
         \ 'char_one': char_one, 'char_two': char_two}
