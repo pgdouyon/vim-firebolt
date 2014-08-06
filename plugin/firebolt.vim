@@ -19,11 +19,11 @@ set cpoptions&vim
 
 function! s:Firebolt(forward, inclusive, mode)
     let c1 = getchar()
-    if (char_one == "\e")
+    if (c1 == "\e")
         return
     endif
     let c2 = getchar()
-    if (char_two == "\e")
+    if (c2 == "\e")
         return
     endif
     let char_one = type(c1) ? c1 : nr2char(c1)
