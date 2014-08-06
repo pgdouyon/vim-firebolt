@@ -10,13 +10,14 @@ angle brackets.
 Usage
 -----
 
-By default FirebolT overwrites the set of characters {ftFT;,} to provide the
+By default FirebolT overwrites the set of characters `ftFT;,` to provide the
 2-character search and reverse.  To use different mappings copy the following
 line into your vimrc:
+
 `let g:firebolt_no_mappings = 1`
 
 Custom mappings can be specified by remapping the corresponding
-`<Plug>Firebolt_*` map where the '\*' corresponds to one of {ftFT;,}.
+`<Plug>Firebolt_*` map where the '\*' corresponds to one of `ftFT;,`.
 
 Firebolt also provides functionality to jump to parentheses, brackets, braces,
 or angle brackets using the `gl` or `gL` mappings for forward/backward jumps
