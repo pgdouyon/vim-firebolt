@@ -92,20 +92,18 @@ function! s:RepeatFind(forward, mode)
 endfunction
 
 
-function! s:FireboltPair(forward, mode)
+function! s:Seek(forward, mode)
     let c1 = getchar()
     let c1 = type(c1) ? c1 : nr2char(c1)
-    let seek_table = {'b': '(\|)', 'B': '{\|}', 'a': '<\|>', 'r': '[\|]'}
-    let seek_char = get(seek_table, c1, '')
     let inclusive = (a:mode ==? "o") ? 0 : 1
 
     let s:firebolt = {'forward': a:forward, 'inclusive': inclusive,
-        \ 'char_one': seek_char, 'char_two': "", 'repeat': function("<SID>FireboltPairRepeat")}
+        \ 'char_one': c1, 'char_two': "", 'repeat': function("<SID>SeekRepeat")}
     call s:FireboltFind(a:mode)
 endfunction
 
 
-function! s:FireboltPairRepeat(forward, mode)
+function! s:SeekRepeat(forward, mode)
     let s:firebolt.inclusive = (a:mode ==? "o") ? 0 : 1
 endfunction
 
@@ -124,12 +122,12 @@ onoremap <silent> <Plug>Firebolt_F :<C-u>call <SID>Firebolt(0, 1, "o")<CR>
 onoremap <silent> <Plug>Firebolt_t :<C-u>call <SID>Firebolt(1, 0, "o")<CR>
 onoremap <silent> <Plug>Firebolt_T :<C-u>call <SID>Firebolt(0, 0, "o")<CR>
 
-nnoremap <silent> <Plug>Firebolt_gl :<C-u>call <SID>FireboltPair(1, "n")<CR>
-nnoremap <silent> <Plug>Firebolt_gL :<C-u>call <SID>FireboltPair(0, "n")<CR>
-vnoremap <silent> <Plug>Firebolt_gl :<C-u>call <SID>FireboltPair(1, "v")<CR>
-vnoremap <silent> <Plug>Firebolt_gL :<C-u>call <SID>FireboltPair(0, "v")<CR>
-onoremap <silent> <Plug>Firebolt_gl :<C-u>call <SID>FireboltPair(1, "o")<CR>
-onoremap <silent> <Plug>Firebolt_gL :<C-u>call <SID>FireboltPair(0, "o")<CR>
+nnoremap <silent> <Plug>Firebolt_r :<C-u>call <SID>Seek(1, "n")<CR>
+nnoremap <silent> <Plug>Firebolt_R :<C-u>call <SID>Seek(0, "n")<CR>
+vnoremap <silent> <Plug>Firebolt_r :<C-u>call <SID>Seek(1, "v")<CR>
+vnoremap <silent> <Plug>Firebolt_R :<C-u>call <SID>Seek(0, "v")<CR>
+onoremap <silent> <Plug>Firebolt_r :<C-u>call <SID>Seek(1, "o")<CR>
+onoremap <silent> <Plug>Firebolt_R :<C-u>call <SID>Seek(0, "o")<CR>
 
 nnoremap <silent> <Plug>Firebolt_; :<C-u>call <SID>RepeatFind(1, "n")<CR>
 nnoremap <silent> <Plug>Firebolt_, :<C-u>call <SID>RepeatFind(0, "n")<CR>
@@ -145,8 +143,10 @@ if !exists("g:firebolt_no_mappings") || (g:firebolt_no_mappings == 0)
     map T <Plug>Firebolt_T
     map ; <Plug>Firebolt_;
     map , <Plug>Firebolt_,
-    map gl <Plug>Firebolt_gl
-    map gL <Plug>Firebolt_gL
+    map r <Plug>Firebolt_r
+    map R <Plug>Firebolt_R
+    noremap s r
+    noremap S R
 endif
 
 let &cpoptions = s:save_cpo

@@ -2,9 +2,8 @@ FirebolT
 ========
 
 FirebolT provides enhanced f/t motions for Vim, replacing the defaults with a
-2-character inline search.  In addition FirebolT provides a one-character inline
-search motion specifically for jumping to parentheses, brackets, braces, and
-angle brackets.
+2-character inline search.  In addition FirebolT provides a one-character search
+motion to replace f/F.
 
 
 Usage
@@ -19,20 +18,11 @@ line into your vimrc:
 Custom mappings can be specified by remapping the corresponding
 `<Plug>Firebolt_*` map where the '\*' corresponds to one of `ftFT;,`.
 
-Firebolt also provides functionality to jump to parentheses, brackets, braces,
-or angle brackets using the `gl` or `gL` mappings for forward/backward jumps
-respectively.  These mappings use the same one-char alias as [surround.vim][] to
-determine the character to jump to:
+Firebolt also provides a one-character search motion using `r` and `R` for
+foward/backward searching, respectively.
 
-| Input | Target |
-| ----- | ------ |
-| b     | ( or ) |
-| B     | { or } |
-| r     | [ or ] |
-| a     | < or > |
-
-The default mapping can be overridden via the `<Plug>Firebolt_gl` and
-`<Plug>Firebolt_gL` mappings.
+The default mapping can be overridden via the `<Plug>Firebolt_r` and
+`<Plug>Firebolt_R` mappings.
 
 
 Installation
