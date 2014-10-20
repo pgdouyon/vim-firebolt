@@ -18,8 +18,8 @@ line into your vimrc:
 Custom mappings can be specified by remapping the corresponding
 `<Plug>Firebolt_*` map where the '\*' corresponds to one of `ftFT;,`.
 
-Firebolt also provides a one-character search motion using `r` and `R` for
-foward/backward searching, respectively.
+Firebolt also provides a one-character inclusive search motion using `r` and
+`R` for foward/backward searching, respectively.
 
 The default mapping can be overridden via the `<Plug>Firebolt_r` and
 `<Plug>Firebolt_R` mappings.

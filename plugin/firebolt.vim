@@ -84,9 +84,6 @@ function! s:RepeatFind(forward, mode)
     endif
     let fwd = s:firebolt.forward
     let s:firebolt.forward = a:forward ? fwd : !fwd
-    if has_key(s:firebolt, 'repeat')
-        call s:firebolt.repeat(a:forward, a:mode)
-    endif
     call s:FireboltFind(a:mode)
     let s:firebolt.forward = fwd
 endfunction
@@ -95,17 +92,13 @@ endfunction
 function! s:Seek(forward, mode)
     let c1 = getchar()
     let c1 = type(c1) ? c1 : nr2char(c1)
-    let inclusive = (a:mode ==? "o") ? 0 : 1
+    let inclusive = 1
 
     let s:firebolt = {'forward': a:forward, 'inclusive': inclusive,
-        \ 'char_one': c1, 'char_two': "", 'repeat': function("<SID>SeekRepeat")}
+        \ 'char_one': c1, 'char_two': ""}
     call s:FireboltFind(a:mode)
 endfunction
 
-
-function! s:SeekRepeat(forward, mode)
-    let s:firebolt.inclusive = (a:mode ==? "o") ? 0 : 1
-endfunction
 
 nnoremap <silent> <Plug>Firebolt_f :<C-u>call <SID>Firebolt(1, 1, "n")<CR>
 nnoremap <silent> <Plug>Firebolt_F :<C-u>call <SID>Firebolt(0, 1, "n")<CR>
