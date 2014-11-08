@@ -1,27 +1,21 @@
 FirebolT
 ========
 
-FirebolT provides enhanced f/t motions for Vim, replacing the defaults with a
-2-character inline search.  In addition FirebolT provides a one-character search
-motion to replace f/F.
+FirebolT provides an extra 2-character inline search motion for Vim to augment
+the built-in f/t motions.
 
 
 Usage
 -----
 
-By default FirebolT overwrites the set of characters `ftFT;,` to provide the
-2-character search and reverse.  To use different mappings copy the following
-line into your vimrc:
+By default FirebolT overwrites the characters `r` and `R` to provide the
+2-character search and reverse and remaps `s`/`S` to replace the built-in
+`r`/`R` functionality.  To use different mappings copy the following line into
+your vimrc:
 
 `let g:firebolt_no_mappings = 1`
 
-Custom mappings can be specified by remapping the corresponding
-`<Plug>Firebolt_*` map where the '\*' corresponds to one of `ftFT;,`.
-
-Firebolt also provides a one-character inclusive search motion using `r` and
-`R` for foward/backward searching, respectively.
-
-The default mapping can be overridden via the `<Plug>Firebolt_r` and
+Custom mappings can be specified by remapping the `<Plug>Firebolt_r` and
 `<Plug>Firebolt_R` mappings.
 
 
