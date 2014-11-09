@@ -86,6 +86,9 @@ function! s:RepeatFind(repeat_cmd, mode)
         call s:FireboltFind(a:mode)
         let s:firebolt.forward = fwd
     else
+        if a:mode ==? "v"
+            normal! gv
+        endif
         let operator = (a:mode ==? "o") ? v:operator : ""
         execute "normal! ".v:count1.operator.a:repeat_cmd
     endif
@@ -95,6 +98,9 @@ endfunction
 function! s:LegacyFind(find_cmd, mode)
     if exists("b:firebolt_find")
         unlet b:firebolt_find
+    endif
+    if a:mode ==? "v"
+        normal! gv
     endif
     let operator = (a:mode ==? "o") ? v:operator : ""
     let c1 = getchar()
