@@ -103,6 +103,9 @@ function! s:LegacyFind(find_cmd, mode)
     let char = type(c1) ? c1 : nr2char(c1)
     if strlen(char) == 1
         execute "normal! ".visual.v:count1.a:find_cmd.char
+        if a:mode ==? "o"
+            silent! call repeat#set(v:operator."\<Plug>Firebolt_;", v:count1)
+        endif
     endif
 endfunction
 
